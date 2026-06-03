@@ -127,6 +127,10 @@ app.get("/_openclaw/system/stats", async (req, reply) => {
   };
 });
 
+// Register stripe routes
+import stripeRoutes from "./stripe-routes.js";
+await stripeRoutes(app, pool);
+
 // Start
 const port = 3001;
 await app.listen({ port, host: "127.0.0.1" });
