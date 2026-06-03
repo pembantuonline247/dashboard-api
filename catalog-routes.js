@@ -101,7 +101,7 @@ export default async function catalogRoutes(app, pool) {
   app.post("/usage/log", async (req, reply) => {
     const { client_id, model, session_id, input_tokens, output_tokens, endpoint } = req.body;
     const total = (input_tokens || 0) + (output_tokens || 0);
-    const TOKENS_PER_CREDIT = 100000;
+    const TOKENS_PER_CREDIT = 50000;
     const creditsConsumed = parseFloat((total / TOKENS_PER_CREDIT).toFixed(4));
 
     await pool.query(
