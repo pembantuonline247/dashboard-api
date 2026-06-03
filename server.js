@@ -165,7 +165,19 @@ app.get("/clients/:id/whatsapp/qr", async (req, reply) => {
 
 // Stripe routes
 import stripeRoutes from "./stripe-routes.js";
+import catalogRoutes from "./catalog-routes.js";
+
+await catalogRoutes(app, pool);
+
 await stripeRoutes(app, pool);
+
+
+// Chat endpoint
+app.post("/chat", async (req, reply) => {
+  const { message } = req.body || {};
+  if (!message) return reply.code(400).send({ error: "Message required" });
+  return { reply: "I'm the Pembantu assistant. I can help you manage clients, check system stats, and answer questions about your infrastructure." };
+});
 
 // Start
 const port = 3001;

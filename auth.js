@@ -78,6 +78,12 @@ export default async function authRoutes(app, pool) {
       return { token, user: { role: "admin", name: "Admin" } };
     }
 
+    // Skip client DB lookup if email is not a UUID (prevents SQL errors)
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(email)) {
+      return reply.code(401).send({ error: "Invalid credentials" });
+    }
+
     const { rows } = await pool.query(
       "SELECT id, name, subdomain FROM clients WHERE id = $1",
       [email]
