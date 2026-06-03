@@ -128,10 +128,6 @@ app.get("/clients/:id/invoices", async (req, reply) => {
   );
   return rows;
 });
-// GET /clients/:id/whatsapp/qr
-app.get("/clients/:id/whatsapp/qr", async (req, reply) => {
-  return { qr: "" };
-});
 // Stripe routes
 import stripeRoutes from "./stripe-routes.js";
 import catalogRoutes from "./catalog-routes.js";
@@ -139,12 +135,15 @@ import chatRoutes from "./chat-routes.js";
 import workspaceRoutes from "./workspace-routes.js";
 import registrationRoutes from "./registration-routes.js";
 import integrationRoutes from "./integration-routes.js";
+import mediaTermsRoutes from "./media-terms-routes.js";
+import whatsappRoutes from "./whatsapp-routes.js";
 await catalogRoutes(app, pool);
 await stripeRoutes(app, pool);
 await chatRoutes(app, pool);
 await workspaceRoutes(app, pool);
 await registrationRoutes(app, pool);
 await integrationRoutes(app, pool);
+await whatsappRoutes(app, pool);
 
 // Start
 const port = 3001;
