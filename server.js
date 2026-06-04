@@ -137,6 +137,7 @@ import registrationRoutes from "./registration-routes.js";
 import integrationRoutes from "./integration-routes.js";
 import mediaTermsRoutes from "./media-terms-routes.js";
 import whatsappRoutes from "./whatsapp-routes.js";
+import agentRoutes from "./agent-routes.js";
 await catalogRoutes(app, pool);
 await stripeRoutes(app, pool);
 await chatRoutes(app, pool);
@@ -145,6 +146,7 @@ await registrationRoutes(app, pool);
 await integrationRoutes(app, pool);
 await whatsappRoutes(app, pool);
 
+await agentRoutes(app, pool);
 // Start
 const port = 3001;
 await app.listen({ port, host: "127.0.0.1" });
